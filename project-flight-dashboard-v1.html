@@ -1,0 +1,481 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Understanding Flight Status using PowerBi Dashboard - Project - Carl Andrew Nera</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			#toc_container {
+   			background: #f9f9f9 none repeat scroll 0 0;
+   			border: 1px solid #aaa;
+    display: table;
+    font-size: 95%;
+    margin-bottom: 1em;
+    padding: 20px;
+    width: auto;
+}
+
+.toc_title {
+    font-weight: 700;
+    text-align: center;
+
+	body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6;
+            padding: 20px;
+            color: #333;
+        }
+        .table-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            text-align: left;
+            padding: 12px;
+        }
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f88a;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .value-cell {
+            font-family: "Courier New", Courier, monospace;
+            text-align: right;
+            font-weight: bold;
+        }
+}
+
+#toc_container li, #toc_container ul, #toc_container ul li{
+    list-style: outside none none !important;
+}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+		<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Data Analyst</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+                            <li><a href="certifications.html">Certifications</a></li>
+							<li class="active"><a href="project-flight-dashboard-v1.html">Understanding Flight Status using PowerBi Dashboard</a></li>
+							<!--<li class="active"><a href="generic.html">Generic Page</a></li>
+							<li><a href="elements.html">Elements Reference</a></li> -->
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/carlnera/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+							<li><a href="https://github.com/carlnera1" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+<!---HEADERR-->
+
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>Understanding Flight Status using PowerBi Dashboard</h1>
+									<p>The goal of this Data Analysis project is to understand which flights are getting delayed or cancelled.</p>
+								</header>
+								
+								<div class="image main"><img src="images/project-flight-dashboard-v1-header.png" alt="" /></div>
+								
+								<!--Content-->
+								<div>
+                                    <p>
+                                       <i>Skills utilized: Microsoft PowerBI, Data Analysis, Dashboard Creation, Data Simplification</i>
+                                    </p>
+
+									<center><h2>The Project Scenario</h2></center>
+									<p>
+										Tasked to use the airport and airline data to identify and understand which flights are on-time, delayed and cancelled and the reason for those.
+									</p>
+
+									<div id="toc_container">
+										<p class="toc_title">Contents</p>
+										<ul class="toc_list">
+                                            <li><a href="#1-importing-of-dataset">IMPORTING OF DATASETS</a></li>
+											<li><a href="#2-transform-dataset">TRANSFORMING OF DATASETS</a></li>
+											<li><a href="#3-relational-model">BUILDING A RELATIONAL MODEL</a></li>
+											<li><a href="#4-dax">CREATING DAX MEASURES</a></li>
+											<li><a href="#5-dashboard-creation">CREATING THE DASHBOARD</a></li>
+											<li><a href="#6-dashboard-finished">DASHBOARD OUTPUT</a></li>
+                                            <li><a href="#7-project-link-github">PROJECT LINK GITHUB</a>
+                                            
+										</ul>
+									</div>
+
+									<hr>						
+
+									<!--IMPORTING OF DATASET-->
+                                    <div>
+                                        <center><h2 id="1-importing-of-dataset">IMPORTING OF DATASETS</h2></center>
+									    <div class="image main"><img src="images/project-flight-dashboard-v1/project-img-04.png" alt="" /></div>
+                                        <p>
+
+                                        </p>
+                                    </div>
+									<hr>
+
+									<div>
+										<center><h2 id="2-transform-dataset">TRANSFORMING OF DATASETS</h2></center>
+                                        <p>
+											<h3>flights.csv</h3>
+											<ol>
+												<li><h4>ISOLATING COLUMNS THAT ARE RELEVANT</h4><br>
+													<ul>
+														<li>YEAR</li>
+														<li>MONTH</li>
+														<li>DAY_OF_WEEK</li>
+														<li>AIRLINE</li>
+														<li>ORIGIN_AIRPORT</li>
+														<li>DEPARTURE_DELAY</li>
+														<li>CANCELLED</li>
+														<li>CANCELLATION_REASON</li>
+														<div class="image main"><img src="images/project-flight-dashboard-v1/project-img-05.png" alt="" /></div>
+													</ul>
+												</li>
+												<li><h4>ADD CONDITIONAL COLUMNS</h4>
+													<ul>
+														<li>STATUS COLUMN:
+															<div class="image main"><img src="images/project-flight-dashboard-v1/project-img-06.png" alt="" /></div>
+														</li>
+													</ul>
+												</li>
+											</ol>
+
+											<h3>airlines.csv, cancellation_codes.csv</h3>
+											<ol>
+												<li><h4>PROMOTE FIRST ROW TO HEADERS (Use First Row as Headers)</h4><br>
+													<ul>
+														<div class="image main"><img src="images/project-flight-dashboard-v1/project-img-07.png" alt="" /></div>
+														<div class="image main"><img src="images/project-flight-dashboard-v1/project-img-08.png" alt="" /></div>
+													</ul>
+												</li>
+											</ol>
+                                        </p>
+									</div>
+									<hr>
+
+									<div>
+										<center><h2 id="3-relational-model">BUILDING A RELATIONAL MODEL</h2></center>
+                                        <p>
+											<div class="image main"><img src="images/project-flight-dashboard-v1/project-img-03.png" alt="" /></div>
+											<b>The following columns are referenced (Star Schema):</b>
+											<table>
+												<thead>
+													
+													<tr>
+														<td>
+															<b>PRIMARY KEY COLUMN</b>
+														</td>
+														<td>
+															<b>FOREIGN KEY COLUMN</b>
+														</td>
+														<td>
+															<b>CARDINALITY</b>
+														</td>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>airlines.IATA_CODE</td>
+														<td>flights.AIRLINE</td>
+														<td>One to Many (1:*)</td>
+													</tr>
+													<tr>
+														<td>airports.IATA_CODE</td>
+														<td>flights.ORIGIN_AIRPORT</td>
+														<td>One to Many (1:*)</td>
+													</tr>
+													<tr>
+														<td>cancellation_codes.CANCELLATION_REASON</td>
+														<td>flights.CANCELLATION_REASON</td>
+														<td>One to Many (1:*)</td>
+													</tr>
+												</tbody>
+											</table>
+										</p>
+									</div>
+									<hr>
+
+									<div>
+										<center><h2 id="4-dax">CREATING DAX (DATA ANALYSIS EXPRESSIONS) MEASURES</h2></center>
+                                        <p>
+											The goal is to enhance the data model to create new fields and metrics to support the analysis.
+											<table>
+												<thead>
+													<tr>
+														<td>
+															<b>COLUMN NAME</b>
+														</td>
+														<td>
+															<b>TABLE</b>
+														</td>
+														<td>
+															<b>FORMULA</b>
+														</td>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Total Flights</td>
+														<td>flights</td>
+														<td><i>Total Flights = COUNTROWS(flights)</i></td>
+													</tr>
+													<tr>
+														<td>Canceled Flights</td>
+														<td>flights</td>
+														<td><i>Canceled Flights = CALCULATE([Total Flights],flights[Status]="Canceled")</i></td>
+													</tr>
+													<tr>
+														<td>Delayed Flights</td>
+														<td>flights</td>
+														<td><i>Delayed Flights = CALCULATE([Total Flights],flights[Status]="Delayed")</i></td>
+													</tr>
+													<tr>
+														<td>On-Time Flights</td>
+														<td>flights</td>
+														<td><i>Canceled Flights = CALCULATE([Total Flights],flights[Status]="On-Time")</i></td>
+													</tr>
+													<tr>
+														<td>% Canceled</td>
+														<td>flights</td>
+														<td><i>% Canceled = DIVIDE([Canceled Flights],[Total Flights],"-")</i></td>
+													</tr>
+													<tr>
+														<td>% Delayed</td>
+														<td>flights</td>
+														<td><i>% Delayed = DIVIDE([Delayed Flights],[Total Flights],"-")</i></td>
+													</tr>
+													<tr>
+														<td>% On-Time</td>
+														<td>flights</td>
+														<td><i>% On-Time = DIVIDE([On-Time Flights],[Total Flights],"-")</i></td>
+													</tr>
+												</tbody>
+											</table>
+										</p>
+									</div>
+									<hr>
+
+									<div>
+										<center><h2 id="5-dashboard-creation">CREATING THE DASHBOARD</h2></center>
+                                        <p>
+											For creating the dashboard, we may use the visualization guide for a clear and logical flow:
+											<div class="image main"><img src="images/project-flight-dashboard-v1/project-img-09.png" alt="" /></div>
+											<table>
+												<thead>
+													<tr>
+														<td><b>CHART NAME</b></td>
+														<td><b>CHART TYPE</b></td>
+														<td><b>COLUMNS USED</b></td>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>TOTAL FLIGHTS - Big Number</td>
+														<td>CARD</td>
+														<td>flights.Total Flights</td>
+													</tr>
+													<tr>
+														<td>TOTAL FLIGHTS - Monthly Trend</td>
+														<td>LINE CHART</td>
+														<td>
+															<ul>
+																<li>X-AXIS - flights.MONTH</li>
+																<li>Y-AXIS - flights.Total Flights</li>
+																<li>TOOLTIPS - flights.% On-Time</li>
+															</ul>
+														</td>
+													</tr>
+														<tr>
+														<td>DELAYED FLIGHTS - Big Number</td>
+														<td>CARD</td>
+														<td>flights.Delayed Flights</td>
+													</tr>
+													<tr>
+														<td>DELAYED FLIGHTS - Monthly Trend</td>
+														<td>LINE CHART</td>
+														<td>
+															<ul>
+																<li>X-AXIS - flights.MONTH</li>
+																<li>Y-AXIS - flights.Delayed Flights</li>
+																<li>TOOLTIPS - flights.% Delayed</li>
+															</ul>
+														</td>
+													</tr>
+													<tr>
+														<td>CANCELED FLIGHTS - Big Number</td>
+														<td>CARD</td>
+														<td>flights.Canceled Flights</td>
+													</tr>
+													<tr>
+														<td>CANCELED FLIGHTS - Monthly Trend</td>
+														<td>LINE CHART</td>
+														<td>
+															<ul>
+																<li>X-AXIS - flights.MONTH</li>
+																<li>Y-AXIS - flights.Canceled Flights</li>
+																<li>TOOLTIPS - flights.% Canceled</li>
+															</ul>
+														</td>
+													</tr>
+													<tr>
+														<td>FLIGHT STATUS - ON-TIME</td>
+														<td>CARD</td>
+														<td>flights.% On-Time</td>
+													</tr>
+													<tr>
+														<td>FLIGHT STATUS - DELAYED</td>
+														<td>CARD</td>
+														<td>flights.% Delayed</td>
+													</tr>
+													<tr>
+														<td>FLIGHT STATUS - CANCELED</td>
+														<td>CARD</td>
+														<td>flights.% Canceled</td>
+													</tr>
+													<tr>
+														<td>Total Flights by Airport</td>
+														<td>BAR CHART</td>
+														<td>
+															<ul>
+																<li>X-AXIS - flights.Total Flights</li>
+																<li>Y-AXIS - airports.CITY</li>
+															</ul>
+														</td>
+													</tr>
+													<tr>
+														<td>Delay Rate by Airline</td>
+														<td>BAR CHART</td>
+														<td>
+															<ul>
+																<li>X-AXIS - flights.% Delayed</li>
+																<li>Y-AXIS - airlines.AIRLINE</li>
+															</ul>
+														</td>
+													</tr>
+													<tr>
+														<td>Cancelations by Type</td>
+														<td>DONUT CHART</td>
+														<td>
+															<ul>
+																<li>LEGEND - cancellation_codes.CANCELLATION_DESCRIPTION</li>
+																<li>VALUES - flights.Canceled Flights</li>
+															</ul>
+														</td>
+													</tr>
+													<tr>
+														<td>Cancelations by Day of Week Trend</td>
+														<td>COLUMN CHART</td>
+														<td>
+															<ul>
+																<li>X-AXIS - flights.DAY_OF_WEEK</li>
+																<li>Y-AXIS - flights.% Canceled</li>
+															</ul>
+														</td>
+													</tr>
+													<tr>
+														<td>Total Flights by Status (On-Time, Delayed, Canceled)</td>
+														<td>STACKED BAR CHART</td>
+														<td>
+															<ul>
+																<li>X-AXIS - flights.Total Flights</li>
+																<li>LEGEND - flights.Status</li>
+															</ul>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</p>
+									</div>
+									<hr>
+
+									<div>
+										<center><h2 id="6-dashboard-finished">DASHBOARD OUTPUT</h2></center>
+                                        <p>
+											<div class="image main"><img src="images/project-flight-dashboard-v1/project-img-01.png" alt="" /></div>
+										</p>
+									</div>	
+
+                                    <div  id="7-project-link-github">
+                                        <br><hr>
+                                        <center><h2>PROJECT LINK GITHUB</h2></center>
+
+                                        <p>
+                                                Kindly see the link for the project itself via github:
+                                            <a>https://github.com/carlnera1/powerbi-flight-dashboard</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+                    </div>
+
+					<!-- Footer -->
+					<footer id="footer">
+						<section class="split contact">
+							<section>
+								<h3>Email</h3>
+								<p><a href="#">carlandrewnera@gmail.com</a></p>
+							</section>
+							<section>
+								<ul class="icons alt">
+									<li><a href="https://www.linkedin.com/in/carlnera/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+									<li><a href="https://github.com/carlnera1" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; CARL ANDREW NERA - DATA ANALYST</li>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
